@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+html(lang="ru")
+    head
+        meta(charset="UTF-8")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        title Document
+    body
+        header
+            .container
+                .header__content 
+                    .logo 
+                        img(src=require('./assets/img/logo.png').default, alt="logo")
+                        img(src=require('./assets/img/logo.png').default, alt="logo").logo__reverse
+                    nav
+                        ul.header__menu 
+                            li
+                                a(href="#") Main
+                            li
+                                a(href="#") Gallery
+                            li
+                                a(href="#") News
+                            li
+                                a(href="#") Profile
+                    .header__contact 
+                        span +544 3490 00000
+                        | Звони скорее!
+                .header__title 
+                    h1 Найдено 349 котов
+        main 
+            .container 
+                .sortBy 
+                    span Сортировать по:
+                    .sortBy__price 
+                        | Цене 
+                        <i class="fas fa-chevron-down"></i>
+                    .sortBy__age
+                        | Возрасту 
+                        <i class="fas fa-chevron-down"></i>
+                .catalog

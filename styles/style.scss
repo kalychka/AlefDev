@@ -1,0 +1,109 @@
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 18px;
+    color: black;
+    font-weight: 400;
+}
+
+.container {
+    max-width: 1280px;
+    margin: 0 auto;
+}
+
+header {
+    position: relative;
+    background-color: rgba(31, 32, 33, 0.79);
+    padding: 40px 0px 66px 0px;
+    background-image: url(../assets/img/header_bg.png);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    color: white;
+    &::before {
+        content: '';
+        position: absolute;
+        z-index: 1;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(31, 32, 33, 0.79);
+    }
+
+    .header__content {
+        position: relative;
+        display: grid;
+        grid-template-columns: 1fr 4fr 2fr;
+        grid-column-gap: 120px;
+        z-index: 2;
+    }
+
+    .header__title {
+        position: relative;
+        z-index: 2;
+        margin-top: 50px;
+    }
+
+    .logo {
+        position: relative;
+        width: 78px;
+        height: 50px;
+        .logo__reverse {
+            position: absolute;
+            left: 15px;
+            transform: rotate(180deg);
+        }
+    }
+    nav {
+        .header__menu {
+            display: flex;
+            list-style: none;
+            li {
+                margin-right: 80px;
+                a {
+                    text-decoration: none;
+                    color: white;
+                    font-weight: 400;
+                }
+            }
+        }
+    }
+    .header__contact {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        justify-content: center;
+        span {
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+    }
+}
+
+main {
+    padding: 37px 0px 83px 0px;
+    .sortBy {
+        display: flex;
+        span {
+            font-weight: bold;
+            margin-right: 48px;    
+        }
+        .sortBy__price,
+        .sortBy__age  {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            i {
+                margin-left: 14px;
+            }
+        }
+        .sortBy__price {
+            margin-right: 55px;
+        }
+    }
+}
