@@ -30,10 +30,28 @@ html(lang="ru")
             .container 
                 .sortBy 
                     span Сортировать по:
-                    .sortBy__price 
+                    .sortBy__price(id="sortByPrice") 
                         | Цене 
                         <i class="fas fa-chevron-down"></i>
                     .sortBy__age
                         | Возрасту 
                         <i class="fas fa-chevron-down"></i>
-                .catalog
+                div(id="catalog")
+                .load__more(id="addMore")
+                    span Показать еще 20 товаров
+                section.promo
+                    .promo__title 
+                        h1 Успей купить! 
+                        p Подпишись и успей <br> словить все акции
+                    .promo__form
+                        form(action="")
+                            input(type="email" placeholder="Email").promo__form__email
+                            input(type="submit" value="Подписаться").promo__form__button
+                            br
+                            .promo__form__subscribe
+                                input(type="checkbox" id="news")
+                                    
+                                label(for="news")
+                                    | Подписаться на новости
+
+                
