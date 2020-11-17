@@ -3,6 +3,8 @@ import './index.pug'
 import './assets/fontawesome-free-5.15.1-web/css/all.min.css'
 import data from './assets/data.json'
 
+let defaultCatalogState = true;
+let defaultCatalog;
 let amountStart = 0;
 let topBtn = document.querySelector('.scrollTop');
 window.addEventListener('scroll', trackScroll);
@@ -28,21 +30,17 @@ function scrollTop() {
 
 window.onload = () => {
     loadAllCats();
-    addItems();
+    addItems(6, false, data);
 }
 
-
-
-
-
-
+defaultCatalog = Object.assign({}, data);
 
 function loadAllCats() {
     mainTitle.insertAdjacentHTML('beforeend', `<h1>Найдено ${data.length} котов</h1>`)
 }
 
 
-function addItems(amount = 6, sort = false) {
+function addItems(amount = 6, sort = false, data) {
 
     if (sort) {
         amountStart = 0;
@@ -106,33 +104,65 @@ function addItems(amount = 6, sort = false) {
 }
 
 sortByPrice.onclick = function() {
-    data.sort( function (a, b) {
-        if ( a.price > b.price) return 1;
-        if ( a.price < b.price) return -1;
-    })    
-    
-    let item = document.querySelectorAll('.item');
-    item.forEach(function(elem) {
-        elem.parentNode.removeChild(elem);
-    })
-    addItems(6, true);
+    sortByPrice.classList.toggle("checkedSort");
+    if (defaultCatalogState) {
+        data.sort( function (a, b) {
+            if ( a.price > b.price) return 1;
+            if ( a.price < b.price) return -1;
+        })    
+        
+        let item = document.querySelectorAll('.item');
+        item.forEach(function(elem) {
+            elem.parentNode.removeChild(elem);
+        })
+        addItems(6, true, data);
+        defaultCatalogState = false;
+    } else {
+        let item = document.querySelectorAll('.item');
+        item.forEach(function(elem) {
+            elem.parentNode.removeChild(elem);
+        })
+        addItems(6, true, defaultCatalog);
+        defaultCatalogState = true;
+    }
+
 }
 
 sortByAge.onclick = function() {
-    data.sort( function (a, b) {
-        if ( a.price > b.price) return 1;
-        if ( a.price < b.price) return -1;
-    })    
-    
-    let item = document.querySelectorAll('.item');
-    item.forEach(function(elem) {
-        elem.parentNode.removeChild(elem);
-    })
-    addItems(6, true);
+    sortByAge.classList.toggle("checkedSort");
+    if (defaultCatalogState) {
+        data.sort( function (a, b) {
+            if ( a.price > b.price) return 1;
+            if ( a.price < b.price) return -1;
+        })    
+        
+        let item = document.querySelectorAll('.item');
+        item.forEach(function(elem) {
+            elem.parentNode.removeChild(elem);
+        })
+        addItems(6, true, data);
+        defaultCatalogState = false;
+    } else {
+        let item = document.querySelectorAll('.item');
+        item.forEach(function(elem) {
+            elem.parentNode.removeChild(elem);
+        })
+        addItems(6, true, defaultCatalog);
+        defaultCatalogState = true;
+    }
+
 }
 
 addMore.onclick = () => {
-    addItems(20);
+    addItems(20, false, data);
+}
+
+burgerClose.onclick = () => {
+    document.querySelector('#menuBurger').className = "menuBurger";
+}
+
+burgerOpen.onclick = () => {
+    document.querySelector('#menuBurger').className = "menuBurger_open";
 }
 
 function addBucked() {
