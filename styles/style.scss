@@ -4,6 +4,10 @@ body, p {
     padding: 0;
 }
 
+body {
+    position: relative;
+}
+
 html {
     font-family: 'Montserrat', sans-serif;
     font-size: 18px;
@@ -15,6 +19,42 @@ html {
 .container {
     max-width: 1280px;
     margin: 0 auto;
+}
+
+.error,
+.notification {
+    padding: 10px;
+    background-color: #E52D2D;
+    color: white;
+    border-radius: 10px;
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    z-index: 999;
+}
+
+.notification {
+    background-color: #6EBBD3;
+}
+
+.scrollTop {
+    display: none;
+    width: 59px;
+    height: 59px;
+    background-color: #6EBBD3;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 99;
+    border: 1px solid black;
+    cursor: pointer;
+}
+
+.scrollTop_show {
+    display: flex;
 }
 
 header {
@@ -182,6 +222,7 @@ main {
                         height: 40px;
                         background-image: url(../assets/img/like.png);
                         opacity: 0.5;
+                        cursor: pointer;
                     }
                 }
             }
@@ -200,6 +241,11 @@ main {
                     font-size: 1rem;
                     font-weight: 700;
                 }
+            }
+
+            .item__button_soldOut {
+                background-color: #1F2021;
+                cursor: default;
             }
 
 

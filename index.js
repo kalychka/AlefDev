@@ -3,14 +3,57 @@ import './index.pug'
 import './assets/fontawesome-free-5.15.1-web/css/all.min.css'
 import data from './assets/data.json'
 
+let amountStart = 0;
+let topBtn = document.querySelector('.scrollTop');
+window.addEventListener('scroll', trackScroll);
+topBtn.addEventListener('click', scrollTop);
+
+function trackScroll() {
+    let scrolled = window.pageYOffset;
+    let currentView = document.documentElement.clientHeight;
+    if (scrolled > currentView) {
+      topBtn.classList.add('scrollTop_show');
+    }
+    if (scrolled < currentView) {
+      topBtn.classList.remove('scrollTop_show');
+    }
+}
+
+function scrollTop() {
+    if (window.pageYOffset > 0) {
+      window.scrollBy(0, -20);
+      setTimeout(scrollTop, 0);
+    }
+}
 
 window.onload = () => {
+    loadAllCats();
     addItems();
 }
 
-function addItems(amount = 6) {
-    let amountStart = 0;
-    for (let i = amountStart; i < amount; i++) {
+
+
+
+
+
+
+function loadAllCats() {
+    mainTitle.insertAdjacentHTML('beforeend', `<h1>Найдено ${data.length} котов</h1>`)
+}
+
+
+function addItems(amount = 6, sort = false) {
+
+    if (sort) {
+        amountStart = 0;
+    };
+
+    if (amountStart + amount > data.length) {
+        createError('Товары закончились');
+        return
+    }
+    
+    for (let i = amountStart; i < (amountStart + amount); i++) {
         catalog.insertAdjacentHTML('beforeend', `
         <div class="item">
             <div class="item__content">
@@ -26,7 +69,7 @@ function addItems(amount = 6) {
                     <div class="item__content__description">
                         <span class="color">${data[i].color}<br>окрас</span>
                         <span class="age">
-                            <b>${data[i].age}</b>
+                            <b>${data[i].age} мес.</b>
                             <br>
                             Возраст
                         </span> 
@@ -51,24 +94,77 @@ function addItems(amount = 6) {
         if (data[i].like) {
             catalog.lastElementChild.classList.add('like')
         }
-        amountStart++;
+        if (data[i].soldOut)  {
+            catalog.lastElementChild.querySelector('.item__button > span').innerHTML = 'Продано';
+            catalog.lastElementChild.querySelector('.item__button').classList.add('item__button_soldOut');
+        }
+        catalog.lastElementChild.querySelector('.item__photo__like').addEventListener('click', addBucked);
+        
     }
+    amountStart += amount;
+    
 }
 
 sortByPrice.onclick = function() {
     data.sort( function (a, b) {
-        if ( a.price < b.price) return 1;
-        if ( a.price > b.price) return -1;
-    })
+        if ( a.price > b.price) return 1;
+        if ( a.price < b.price) return -1;
+    })    
+    
     let item = document.querySelectorAll('.item');
     item.forEach(function(elem) {
         elem.parentNode.removeChild(elem);
     })
-    addItems();
+    addItems(6, true);
+}
+
+sortByAge.onclick = function() {
+    data.sort( function (a, b) {
+        if ( a.price > b.price) return 1;
+        if ( a.price < b.price) return -1;
+    })    
+    
+    let item = document.querySelectorAll('.item');
+    item.forEach(function(elem) {
+        elem.parentNode.removeChild(elem);
+    })
+    addItems(6, true);
 }
 
 addMore.onclick = () => {
     addItems(20);
-} 
+}
+
+function addBucked() {
+    let notif = document.createElement('div');
+    notif.className = 'notification';
+    notif.innerHTML = 'Товар добавлен в корзину';
+    document.body.append(notif);
+    setTimeout(() => {
+        document.body.removeChild(notif);
+    }, 1500);
+}
+
+
+let form = document.querySelector('#form');
+let submit = form.querySelector('#submit');
+let email = form.querySelector('#email');
+
+form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    if (!email.value) {
+        createError('Поле не может быть пустым')
+    }
+})
+
+function createError(message) {
+    let error = document.createElement('div');
+    error.className = 'error';
+    error.innerHTML = message;
+    document.body.append(error);
+    setTimeout( () => {
+        document.body.removeChild(error);
+    }, 2000)
+}
 
 

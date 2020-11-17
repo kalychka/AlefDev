@@ -24,8 +24,7 @@ html(lang="ru")
                     .header__contact 
                         span +544 3490 00000
                         | Звони скорее!
-                .header__title 
-                    h1 Найдено 349 котов
+                .header__title(id="mainTitle")          
         main 
             .container 
                 .sortBy 
@@ -33,7 +32,7 @@ html(lang="ru")
                     .sortBy__price(id="sortByPrice") 
                         | Цене 
                         <i class="fas fa-chevron-down"></i>
-                    .sortBy__age
+                    .sortBy__age(id="sortByAge")
                         | Возрасту 
                         <i class="fas fa-chevron-down"></i>
                 div(id="catalog")
@@ -44,14 +43,15 @@ html(lang="ru")
                         h1 Успей купить! 
                         p Подпишись и успей <br> словить все акции
                     .promo__form
-                        form(action="")
-                            input(type="email" placeholder="Email").promo__form__email
-                            input(type="submit" value="Подписаться").promo__form__button
+                        form(id="form")
+                            input(type="email" placeholder="Email" id="email").promo__form__email
+                            input(type="submit" value="Подписаться" id="submit").promo__form__button
                             br
                             .promo__form__subscribe
                                 input(type="checkbox" id="news")
-                                    
                                 label(for="news")
                                     | Подписаться на новости
+        .scrollTop 
+            <i class="fas fa-chevron-up"></i>
 
                 
